@@ -31,7 +31,7 @@ interface Hotkey {
 
 class Hotkeys {
 	private keys_dom: { [key: string]: HTMLDivElement } = {};
-	private hotkeys: { [key: string]: Hotkey } = {};
+	hotkeys: { [key: string]: Hotkey } = {};
 
 	private modal: HTMLDivElement;
 	private feedback: HTMLDivElement;
@@ -53,7 +53,23 @@ class Hotkeys {
 
 		document.body.append(this.modal, this.feedback);
 
-		this.construct_modal();
+		for (const row of KEYBOARD_KEYS) {
+			const row_div: HTMLDivElement = document.createElement("div");
+			row_div.classList.add("row");
+			this.keyboard.append(row_div);
+			for (const column of row) {
+				const key_div: HTMLDivElement = document.createElement("div");
+				key_div.classList.add("key");
+				key_div.textContent = column;
+				row_div.append(key_div);
+				this.keys_dom[column] = key_div;
+				if (
+					column == ("back" || "tab" || "enter" || "caps" || "shift" || "ctrl")
+				)
+					key_div.classList.add("large");
+				else if (column == "space") key_div.classList.add("space");
+			}
+		}
 
 		addEventListener("keydown", this.keydown);
 		addEventListener("paste", () => {
@@ -78,49 +94,25 @@ class Hotkeys {
 			console.warn(`Hotkey ignored, hotkey '${hotkey.key}' already exists`);
 		} else {
 			this.hotkeys[hotkey.key] = hotkey;
-			this.construct_modal();
+			let pophover = document.createElement("div");
+			pophover.classList.add("pophover");
+			pophover.textContent = hotkey.long;
+			if (hotkey.experimental) {
+				const experimental: HTMLSpanElement = document.createElement("span");
+				experimental.classList.add("experimental_icon");
+				experimental.innerText = "Experimental 🧪";
+				pophover.append(experimental);
+				this.keys_dom[hotkey.key].classList.add("experimental");
+			}
+			this.keys_dom[hotkey.key].append(pophover);
+			this.keys_dom[hotkey.key].classList.add("used");
 		}
 	}
 
 	public remove(key: string): void {
 		delete this.hotkeys[key];
-		this.construct_modal();
-	}
-
-	private construct_modal(): void {
-		this.keyboard.innerHTML = "";
-		for (const row of KEYBOARD_KEYS) {
-			const row_div: HTMLDivElement = document.createElement("div");
-			row_div.classList.add("row");
-			this.keyboard.append(row_div);
-			for (const key of row) {
-				const key_div: HTMLDivElement = document.createElement("div");
-				key_div.classList.add("key");
-				key_div.textContent = key;
-				row_div.append(key_div);
-				this.keys_dom[key] = key_div;
-				for (const hotkey1 in this.hotkeys) {
-					if (this.hotkeys[hotkey1].key == key) {
-						const pophover_div: HTMLDivElement = document.createElement("div");
-						key_div.classList.add("used");
-						pophover_div.classList.add("pophover");
-						key_div.append(pophover_div);
-						pophover_div.textContent = this.hotkeys[hotkey1].long;
-						if (this.hotkeys[hotkey1].experimental) {
-							key_div.classList.add("experimental");
-							const experimental: HTMLSpanElement =
-								document.createElement("span");
-							experimental.classList.add("experimental_icon");
-							experimental.innerText = "Experimental 🧪";
-							pophover_div.append(experimental);
-						}
-					}
-				}
-				if (key == ("back" || "tab" || "enter" || "caps" || "shift" || "ctrl"))
-					key_div.classList.add("large");
-				else if (key == "space") key_div.classList.add("space");
-			}
-		}
+		this.keys_dom[key].classList.remove("used", "experimental");
+		this.keys_dom[key].textContent = key;
 	}
 
 	private keydown = (ev: KeyboardEvent): void => {
