@@ -9,6 +9,14 @@ hotkeys module in TypeScript for easy to add hotkeys
 ##### Requirements
 
 - `hotkeys.css` and `hotkeys.ts`
+- load the css and typescript into html `head` tag
+
+```html
+<link rel="stylesheet" href="hotkeys.css">
+<script defer type="module" src="hotkeys.ts"></script>
+```
+
+- verify you have no error in console
 
 ##### Usage
 
