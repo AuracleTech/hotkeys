@@ -1,11 +1,13 @@
 import { Hotkeys } from "./hotkeys.ts";
 
+document.body.style.backgroundColor = "#04040E";
+
 let hotkeys = new Hotkeys();
 
 hotkeys.set({
 	key: "h",
 	short: "Toggle Hotkeys",
-	long: "Toggle the hotkeys modal",
+	long: "Toggle the hotkeys modal display",
 	func: () => hotkeys.toggle_modal(),
 	experimental: false,
 });
