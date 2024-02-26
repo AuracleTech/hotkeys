@@ -3,17 +3,25 @@ import { Hotkeys } from "./hotkeys.ts";
 let hotkeys = new Hotkeys();
 
 hotkeys.set({
-	key: "f",
-	short: "Toggle Fullscreen",
-	long: "Toggle Fullscreen",
+	key: "h",
+	short: "Toggle Hotkeys",
+	long: "Toggle the hotkeys modal",
+	func: () => hotkeys.toggle_modal(),
+	experimental: false,
+});
+
+hotkeys.set({
+	key: "space",
+	short: "Magenta Background",
+	long: "Change the background color to magenta",
 	func: () => (document.body.style.backgroundColor = "#FF00FF"),
 	experimental: false,
 });
 
 hotkeys.set({
-	key: "r",
-	short: "Interesting",
-	long: "The quick brown fox jumps over the lazy dog",
+	key: "d",
+	short: "Green Background",
+	long: "Change the background color to green",
 	func: () => {
 		document.body.style.backgroundColor = "#BADA55";
 	},
@@ -21,14 +29,14 @@ hotkeys.set({
 });
 
 hotkeys.set({
-	key: "g",
+	key: "a",
 	short: "Toggle party key",
-	long: "Toggle the key 'l' on the hotkeys",
+	long: "Toggle a new 'w' hotkeys",
 	func: () => {
-		hotkeys.hotkeys["l"]
-			? hotkeys.remove("l")
+		hotkeys.hotkeys["w"]
+			? hotkeys.remove("w")
 			: hotkeys.set({
-					key: "l",
+					key: "w",
 					short: "PARTY TIME! 🎉🎊🎉🎊🎉🎊🎉🎊",
 					long: "Change the background color to a random color",
 					func: () => {
@@ -43,3 +51,15 @@ hotkeys.set({
 	},
 	experimental: false,
 });
+
+for (const row of Hotkeys.KEYBOARD_KEYS) {
+	for (const column of row) {
+		hotkeys.set({
+			key: column,
+			short: `Log ${column}`,
+			long: `Log the key '${column}' to the console`,
+			func: () => console.log(`Pressed key '${column}'`),
+			experimental: true,
+		});
+	}
+}

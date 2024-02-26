@@ -89,13 +89,12 @@
 	font-weight: bold;
 }
 #keyboard>.row>.key.used {
-	background-color: #6666a7;
-	color: #222236;
+	background-color: #484884;
+	color: #1f1b29;
 	cursor: help;
-	background-image: linear-gradient(-45deg, transparent, #ffffff66);
 }
 #keyboard>.row>.key.experimental {
-	background-color: #67a88b;
+	background-color: #415d50;
 }
 #keyboard>.row>.key:hover {
 	filter: brightness(1.2);

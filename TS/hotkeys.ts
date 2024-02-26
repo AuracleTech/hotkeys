@@ -1,28 +1,5 @@
-const KEYBOARD_KEYS: string[][] = [
-	[
-		"esc",
-		"f1",
-		"f2",
-		"f3",
-		"f4",
-		"f5",
-		"f6",
-		"f7",
-		"f8",
-		"f9",
-		"f10",
-		"f11",
-		"f12",
-	],
-	["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "back"],
-	["tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
-	["caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "enter"],
-	["l shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "r shift"],
-	["l ctrl", "cmd", "l alt", "space", "r alt", "r ctrl"],
-];
-
 interface Hotkey {
-	key: string; // CHANGE TO INDEPENDENT VARIABLE
+	key: string;
 	short: string;
 	long: string;
 	func: () => void;
@@ -30,6 +7,29 @@ interface Hotkey {
 }
 
 class Hotkeys {
+	static KEYBOARD_KEYS: string[][] = [
+		[
+			"esc",
+			"f1",
+			"f2",
+			"f3",
+			"f4",
+			"f5",
+			"f6",
+			"f7",
+			"f8",
+			"f9",
+			"f10",
+			"f11",
+			"f12",
+		],
+		["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "back"],
+		["tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
+		["caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "enter"],
+		["l shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "r shift"],
+		["l ctrl", "cmd", "l alt", "space", "r alt", "r ctrl"],
+	];
+
 	private keys_dom: { [key: string]: HTMLDivElement } = {};
 	hotkeys: { [key: string]: Hotkey } = {};
 
@@ -53,7 +53,7 @@ class Hotkeys {
 
 		document.body.append(this.modal, this.feedback);
 
-		for (const row of KEYBOARD_KEYS) {
+		for (const row of Hotkeys.KEYBOARD_KEYS) {
 			const row_div: HTMLDivElement = document.createElement("div");
 			row_div.classList.add("row");
 			this.keyboard.append(row_div);
@@ -79,14 +79,6 @@ class Hotkeys {
 			"click",
 			(ev) => ev.target == this.modal && this.toggle_modal()
 		);
-
-		this.set({
-			key: "k",
-			short: "Toggle Hotkeys",
-			long: "Toggle this menu",
-			func: () => this.toggle_modal(),
-			experimental: false,
-		});
 	}
 
 	public set(hotkey: Hotkey): void {
@@ -176,7 +168,7 @@ class Hotkeys {
 		this.hotkeys[hotkey.key].func();
 	};
 
-	private toggle_modal(): void {
+	toggle_modal(): void {
 		this.modal.classList.toggle("display-none");
 	}
 }
