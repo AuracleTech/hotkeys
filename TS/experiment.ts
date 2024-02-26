@@ -1,13 +1,21 @@
-import { hotkey_add } from "./hotkeys.ts";
+import { Hotkeys } from "./hotkeys.ts";
 
-hotkey_add("n", "Short", "Long description", () =>
-	document.write("Hello, World!")
-);
+let hotkeys = new Hotkeys();
 
-hotkey_add(
-	"r",
-	"Unfinished",
-	"This featured has the unfinished flag",
-	() => document.write("Hello, World!"),
-	true
-);
+hotkeys.set({
+	key: "f",
+	short: "Toggle Fullscreen",
+	long: "Toggle Fullscreen",
+	func: () => (document.body.style.backgroundColor = "#FF00FF"),
+	experimental: false,
+});
+
+hotkeys.set({
+	key: "r",
+	short: "Interesting",
+	long: "The quick brown fox jumps over the lazy dog",
+	func: () => {
+		document.body.style.backgroundColor = "#BADA55";
+	},
+	experimental: true,
+});
