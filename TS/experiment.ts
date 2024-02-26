@@ -19,3 +19,27 @@ hotkeys.set({
 	},
 	experimental: true,
 });
+
+hotkeys.set({
+	key: "g",
+	short: "Toggle party key",
+	long: "Toggle the key 'l' on the hotkeys",
+	func: () => {
+		hotkeys.hotkeys["l"]
+			? hotkeys.remove("l")
+			: hotkeys.set({
+					key: "l",
+					short: "PARTY TIME! 🎉🎊🎉🎊🎉🎊🎉🎊",
+					long: "Change the background color to a random color",
+					func: () => {
+						document.body.style.backgroundColor = `rgb(${Math.floor(
+							Math.random() * 256
+						)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+							Math.random() * 256
+						)})`;
+					},
+					experimental: true,
+			  });
+	},
+	experimental: false,
+});
