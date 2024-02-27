@@ -81,7 +81,7 @@ class Hotkeys {
 		);
 	}
 
-	public set(hotkey: Hotkey): void {
+	set(hotkey: Hotkey): void {
 		if (this.hotkeys[hotkey.key]) {
 			console.warn(`Hotkey ignored, hotkey '${hotkey.key}' already exists`);
 		} else {
@@ -101,10 +101,14 @@ class Hotkeys {
 		}
 	}
 
-	public remove(key: string): void {
+	remove(key: string): void {
 		delete this.hotkeys[key];
 		this.keys_dom[key].classList.remove("used", "experimental");
 		this.keys_dom[key].textContent = key;
+	}
+
+	toggle_modal(): void {
+		this.modal.classList.toggle("display-none");
 	}
 
 	private keydown = (ev: KeyboardEvent): void => {
@@ -167,10 +171,6 @@ class Hotkeys {
 
 		this.hotkeys[hotkey.key].func();
 	};
-
-	toggle_modal(): void {
-		this.modal.classList.toggle("display-none");
-	}
 }
 
 export { Hotkeys };
