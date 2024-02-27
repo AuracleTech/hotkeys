@@ -8,17 +8,15 @@ hotkeys module in TypeScript for easy to add hotkeys
 
 ##### Requirements
 
-- `hotkeys.css` and `hotkeys.ts`
-- load the css and typescript into html `head` tag
+- get `hotkeys.css` and `hotkeys.ts`
+
+##### Usage
+
+load the css into html `head` tag
 
 ```html
 <link rel="stylesheet" href="hotkeys.css">
-<script defer type="module" src="hotkeys.ts"></script>
 ```
-
-- verify you have no error in console
-
-##### Usage
 
 initialization
 
@@ -46,7 +44,7 @@ remove a hotkey
 hotkeys.remove("h");
 ```
 
-keys names available
+display keys names available
 
 ```typescript
 for (const row of Hotkeys.KEYBOARD_KEYS) {
