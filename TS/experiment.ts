@@ -1,3 +1,4 @@
+import "../SCSS/hotkeys.scss";
 import { Hotkeys } from "./hotkeys.ts";
 
 document.body.style.backgroundColor = "#04040E";

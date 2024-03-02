@@ -162,8 +162,7 @@ class Hotkeys {
 
 		let hotkey = this.hotkeys[key];
 
-		this.feedback.classList.remove("keypress");
-		this.feedback.classList.remove("display-none");
+		this.feedback.classList.remove("keypress", "display-none");
 		void this.feedback.offsetWidth;
 		this.feedback.classList.add("keypress");
 		const feedback_text = hotkey.short + (hotkey.experimental ? " 🧪" : "");

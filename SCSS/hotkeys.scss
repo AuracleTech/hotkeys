@@ -1,0 +1,159 @@
+$hotkeys-background-color: #1f1b2999;
+
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+		display: auto;
+	}
+	100% {
+		opacity: 0;
+		display: none;
+	}
+}
+
+.display-none {
+	display: none;
+}
+
+#hotkeys_feedback {
+	position: fixed;
+	bottom: 16px;
+	left: 16px;
+	padding: 4px 12px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	z-index: 9999;
+	background-color: $hotkeys-background-color;
+	font-family: Segoe UI;
+	font-size: 16px;
+	color: #ffffffbb;
+	pointer-events: none;
+
+	&.keypress {
+		animation: fadeout 0.25s ease-in-out forwards 0.75s;
+	}
+}
+
+#modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: $hotkeys-background-color;
+	backdrop-filter: blur(45px);
+	z-index: 998;
+	cursor: pointer;
+	user-select: none;
+	font-family: Segoe UI;
+	color: #fff;
+
+	> div {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 5px;
+		cursor: default;
+	}
+}
+
+#keyboard {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 20px;
+	width: 780px;
+	height: 300px;
+	background-color: #1f1b29;
+	display: flex;
+	flex-direction: column;
+
+	.row {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+
+		.key {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-grow: 1;
+			color: #44395c;
+			background-color: #292336;
+			border-radius: 3px;
+			margin: 4px;
+			font-size: 12px;
+			text-transform: uppercase;
+			font-weight: bold;
+
+			&.used {
+				background-color: #484884;
+				color: #1f1b29;
+				cursor: help;
+			}
+
+			&.experimental {
+				background-color: #415d50;
+			}
+
+			&:hover {
+				filter: brightness(1.2);
+			}
+
+			&.large {
+				flex: 2;
+			}
+
+			&.space {
+				flex: 6;
+			}
+
+			> .pophover {
+				display: none;
+				position: absolute;
+				padding: 5px 15px;
+				width: max-content;
+				text-align: center;
+				top: -42px;
+				border-radius: 5px;
+				z-index: 999;
+				text-transform: none;
+				pointer-events: none;
+				background: #ffffff;
+
+				> .experimental_icon {
+					position: absolute;
+					top: 0;
+					left: 50%;
+					transform: translate(-50%, -100%);
+					padding: 5px 15px;
+					border-radius: 5px 5px 0 0;
+					font-weight: normal;
+					white-space: nowrap;
+					background: #1f1b29;
+					color: #4ceca7;
+					font-weight: 500;
+				}
+
+				&:before {
+					content: "";
+					position: absolute;
+					top: 100%;
+					left: 50%;
+					transform: translateX(-50%);
+					width: 0;
+					height: 0;
+					border-left: 10px solid transparent;
+					border-right: 10px solid transparent;
+					border-top: 8px solid #ffffff;
+				}
+			}
+
+			&:hover > .pophover {
+				display: block;
+			}
+		}
+	}
+}
