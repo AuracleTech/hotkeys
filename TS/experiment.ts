@@ -3,7 +3,7 @@ import { Hotkeys } from "./hotkeys.ts";
 
 document.body.style.backgroundColor = "#04040E";
 
-let hotkeys = new Hotkeys();
+const hotkeys = new Hotkeys();
 
 hotkeys.set({
 	key: "h",
