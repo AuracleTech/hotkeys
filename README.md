@@ -8,22 +8,17 @@ hotkeys module in TypeScript for easy to add hotkeys
 
 ##### Requirements
 
-- get `hotkeys.css` and `hotkeys.ts`
+- get `hotkeys.scss` and `hotkeys.ts`
 
 ##### Usage
-
-load the css into html `head` tag
-
-```html
-<link rel="stylesheet" href="hotkeys.css">
-```
 
 initialization
 
 ```typescript
+import "../SCSS/hotkeys.scss";
 import { Hotkeys } from "./hotkeys.ts";
 
-let hotkeys = new Hotkeys();
+const hotkeys = new Hotkeys();
 ```
 
 create a hotkey
@@ -44,7 +39,7 @@ remove a hotkey
 hotkeys.remove("h");
 ```
 
-display keys names available
+print keys names available
 
 ```typescript
 for (const row of Hotkeys.KEYBOARD_KEYS) {
